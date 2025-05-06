@@ -11,6 +11,6 @@ occlusion_enabled = false
 
 [node name="GridMapPropsLevel" type="TileMapLayer" parent="."]
 position = Vector2(0, -10)
-tile_map_data = PackedByteArray("AAAKAAAAAAACAAQAAAAKAAIAAAACAAQAAAA=")
+tile_map_data = PackedByteArray("AAAKAAAAAAAAAAQAAAAKAAIAAAAAAAQAAAAJAAIAAAACAAQAAAA=")
 tile_set = ExtResource("1_rupst")
 y_sort_origin = 1
