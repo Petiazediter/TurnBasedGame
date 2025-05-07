@@ -2,16 +2,16 @@ extends Control
 
 @onready var grid_map: GridWorldMap = get_parent() as GridWorldMap;
 
-var is_debug_mode: bool = true;
+signal update_cell_drawing;
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_mode"):
-		is_debug_mode = !is_debug_mode;
-		queue_redraw();
+func _ready() -> void:
+	update_cell_drawing.connect(_on_update_cell_drawing);
+
+func _on_update_cell_drawing() -> void:
+	queue_redraw();
 
 func _draw() -> void:
-	if is_debug_mode:
-		draw_cells();
+	draw_cells();
 
 func draw_cells() -> void:
 	var cells = grid_map.map;
@@ -35,7 +35,7 @@ func draw_cells() -> void:
 		var has_point = grid_map.astar.has_point(cell.id);
 		if !has_point:\
 			# Draw filled rectangle
-			draw_colored_polygon(points, Color(1, 0, 0, 0.42));
+			draw_colored_polygon(points, Color(1, 0, 0, 1));
 		else:
 			points.append(points[0]) # close the loop
-			draw_polyline(points, Color(.7, .7, .7, .42), 0.2, true)
+			draw_polyline(points, Color(.7, .7, .7, .42), 0.4, true)
