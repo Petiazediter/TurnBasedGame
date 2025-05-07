@@ -7,6 +7,9 @@ func _init(_id: int, _is_walkable: bool) -> void:
     id = _id;
     is_walkable = _is_walkable;
 
+func set_walkable(_is_walkable: bool) -> void:
+    is_walkable = _is_walkable;
+
 static func generate_unique_id_from_vector2i(position: Vector2i) -> int:
     var a = position.x;
     var b = position.y;
