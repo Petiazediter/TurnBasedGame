@@ -37,5 +37,11 @@ func connect_points() -> void:
 		var neighbors = base_map.get_surrounding_cells(cell_coords);
 		for neighbor in neighbors:
 			var neighbor_id = MapCell.generate_unique_id_from_vector2i(neighbor);
-			if astar.has_point(neighbor_id):
+			if astar.has_point(neighbor_id) and astar.has_point(cell_id):
 				astar.connect_points(cell_id, neighbor_id, true);
+
+func get_map_cell_by_id(cell_id: int) -> MapCell:
+	for cell in map:
+		if cell.id == cell_id:
+			return cell;
+	return null;
