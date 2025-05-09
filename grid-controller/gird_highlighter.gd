@@ -3,12 +3,13 @@ class_name GridHighligher;
 
 @onready var grid_map: GridWorldMap = get_parent() as GridWorldMap;
 
-var hovered_cell: MapCell = null;
-
 signal update_cell_drawing;
 
 var SELECTION_COLOR: Color = Color(0.345, 0.196, 0.659, .3);
 var ERROR_COLOR: Color = Color(0.369, 0.035, 0.035, .73);
+
+var highlighted_cells: Array[MapCell] = [];
+var error_highlighted_cells: Array[MapCell] = [];
 
 func _ready() -> void:
 	update_cell_drawing.connect(_on_update_cell_drawing);
@@ -16,30 +17,25 @@ func _ready() -> void:
 func _on_update_cell_drawing() -> void:
 	queue_redraw();
 
-func _input(event: InputEvent) -> void:
-	# Check if the player is moving the mouse:
-	var hovered_cell_curr = hovered_cell;
-	if event is InputEventMouseMotion:
-		var mouse_pos = event.position;
-		var cell_coords = grid_map.base_map.local_to_map(mouse_pos);
-		if cell_coords != null:
-			var cell_id = MapCell.generate_unique_id_from_vector2i(cell_coords);
-			var cell = grid_map.get_map_cell_by_id(cell_id);
-			if cell != null:
-				hovered_cell = cell;
+func select_cells(
+	cells: Array[MapCell],
+	error_non_walkable: bool = true,
+	) -> void:
+		self.highlighted_cells.clear();
+		self.error_highlighted_cells.clear();
+		for cell in cells:
+			if cell.is_walkable or !error_non_walkable:
+				self.highlighted_cells.append(cell);
 			else:
-				hovered_cell = null;
-	
-	if hovered_cell != hovered_cell_curr:
+				self.error_highlighted_cells.append(cell);
 		update_cell_drawing.emit();
 
 func _draw() -> void:
 	draw_grid();
-	if hovered_cell != null:
-		if hovered_cell.is_walkable:
-			highlight_cell(hovered_cell, SELECTION_COLOR, true);
-		else:
-			highlight_cell(hovered_cell, ERROR_COLOR, true);
+	for cell in highlighted_cells:
+		highlight_cell(cell, SELECTION_COLOR, true);
+	for cell in error_highlighted_cells:
+		highlight_cell(cell, ERROR_COLOR, true);
 
 func get_isometric_cell_points(cell: MapCell, should_connect: bool) -> Array[Vector2]:
 	var tilemap = grid_map.base_map;

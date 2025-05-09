@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://dh3ooan1qdigv"]
+[gd_scene load_steps=5 format=4 uid="uid://dh3ooan1qdigv"]
 
 [ext_resource type="Script" uid="uid://dlmqpmlvy72a8" path="res://grid-controller/map_logic.gd" id="1_ehdvd"]
 [ext_resource type="TileSet" uid="uid://cnpxaq0481ky8" path="res://playground_tileset.tres" id="1_gglxv"]
 [ext_resource type="Script" uid="uid://bmdfphnouq1ot" path="res://grid-controller/gird_highlighter.gd" id="3_5sflb"]
+[ext_resource type="Script" uid="uid://bhc7ruyn2omxk" path="res://grid-controller/grid_input_controller.gd" id="4_wuilt"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_ehdvd")
@@ -26,3 +27,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_5sflb")
+
+[node name="GridInputController" type="Node" parent="." node_paths=PackedStringArray("selection_controller")]
+script = ExtResource("4_wuilt")
+selection_controller = NodePath("../GridHighlighter")
