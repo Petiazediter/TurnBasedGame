@@ -17,3 +17,9 @@ func _input(event: InputEvent) -> void:
                 if cell != hovered_cell_curr:
                     hovered_cell = cell;
                     selection_controller.select_cells([cell], true);
+            else:
+                hovered_cell = null;
+                selection_controller.select_cells([], false);
+        else:
+            hovered_cell = null;
+            selection_controller.select_cells([], false);
