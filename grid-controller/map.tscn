@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlmqpmlvy72a8" path="res://grid-controller/map_logic.gd" id="1_ehdvd"]
 [ext_resource type="TileSet" uid="uid://cnpxaq0481ky8" path="res://playground_tileset.tres" id="1_gglxv"]
-[ext_resource type="Script" uid="uid://bmdfphnouq1ot" path="res://grid-controller/debug_node.gd" id="3_5sflb"]
+[ext_resource type="Script" uid="uid://bmdfphnouq1ot" path="res://grid-controller/gird_highlighter.gd" id="3_5sflb"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_ehdvd")
@@ -19,7 +19,7 @@ tile_map_data = PackedByteArray("AAAKAAAAAAAJAAUAAAA=")
 tile_set = ExtResource("1_gglxv")
 y_sort_origin = 1
 
-[node name="DebugNode" type="Control" parent="."]
+[node name="GridHighlighter" type="Control" parent="."]
 z_index = 2
 layout_mode = 3
 anchors_preset = 0

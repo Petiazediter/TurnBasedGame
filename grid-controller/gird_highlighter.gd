@@ -1,9 +1,14 @@
 extends Control
+class_name GridHighligher;
 
 @onready var grid_map: GridWorldMap = get_parent() as GridWorldMap;
 
 var hovered_cell: MapCell = null;
+
 signal update_cell_drawing;
+
+var SELECTION_COLOR: Color = Color(0.345, 0.196, 0.659, .3);
+var ERROR_COLOR: Color = Color(0.369, 0.035, 0.035, .73);
 
 func _ready() -> void:
 	update_cell_drawing.connect(_on_update_cell_drawing);
@@ -32,9 +37,9 @@ func _draw() -> void:
 	draw_grid();
 	if hovered_cell != null:
 		if hovered_cell.is_walkable:
-			highlight_cell(hovered_cell, Color(0.345, 0.196, 0.659, .3), true);
+			highlight_cell(hovered_cell, SELECTION_COLOR, true);
 		else:
-			highlight_cell(hovered_cell, Color(0.369, 0.035, 0.035, .73), true);
+			highlight_cell(hovered_cell, ERROR_COLOR, true);
 
 func get_isometric_cell_points(cell: MapCell, should_connect: bool) -> Array[Vector2]:
 	var tilemap = grid_map.base_map;
@@ -62,11 +67,11 @@ func draw_grid() -> void:
 	var cells = grid_map.map;
 	for cell in cells:
 		var points = get_isometric_cell_points(cell, true);
-		draw_polyline(points, Color(.7, .7, .7, .42), 0.4, true);
+		draw_polyline(points, Color(.7, .7, .7, .42), 0.2, true);
 
 func highlight_cell(cell: MapCell, color: Color, filled: bool) -> void:
 	var points = get_isometric_cell_points(cell, !filled);
 	if filled:
 		draw_colored_polygon(points, color);
 	else:
-		draw_polyline(points, color, 0.4, true);
+		draw_polyline(points, color, 0.2, true);
