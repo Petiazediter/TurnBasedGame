@@ -1,16 +1,7 @@
-[gd_scene load_steps=2 format=4 uid="uid://ko7v8eg74nfd"]
+[gd_scene load_steps=2 format=3 uid="uid://ko7v8eg74nfd"]
 
-[ext_resource type="TileSet" uid="uid://cnpxaq0481ky8" path="res://playground_tileset.tres" id="1_rupst"]
+[ext_resource type="PackedScene" uid="uid://dh3ooan1qdigv" path="res://grid-controller/map.tscn" id="1_rupst"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="GridMapGroundLevel" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAKAAAAAAAKAAEAAAAKAAEAAAAHAAEAAAALAAEAAAAGAAEAAAALAAAAAAAKAAEAAAALAP//AAAJAAEAAAAKAP//AAAGAAEAAAAJAP//AAAKAAEAAAAJAAAAAAAGAAEAAAAJAAEAAAAKAAEAAAAJAAIAAAAKAAEAAAAKAAIAAAAIAAEAAAALAAIAAAAKAAEAAAA=")
-tile_set = ExtResource("1_rupst")
-occlusion_enabled = false
-
-[node name="GridMapPropsLevel" type="TileMapLayer" parent="."]
-position = Vector2(0, -10)
-tile_map_data = PackedByteArray("AAAKAAAAAAAAAAQAAAAKAAIAAAAAAAQAAAAJAAIAAAACAAQAAAA=")
-tile_set = ExtResource("1_rupst")
-y_sort_origin = 1
+[node name="Map" parent="." instance=ExtResource("1_rupst")]
